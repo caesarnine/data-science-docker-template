@@ -1,0 +1,21 @@
+version: "3.2"
+
+services:
+  python:       
+    build: 
+      dockerfile: ./docker/Dockerfile-prod
+      context: ./
+    image: my_project_python # alternatively replace with your docker registry/dockerhub info (i.e. youruser/example_project_python:latest for dockerhub)
+    
+    # uncomment the below two lines if you plan on running via docker-compose in production
+    #env_file: 
+    #  - .env_prod
+
+    command: 
+      python /code/example.py
+
+    # note - once in production I usually pull from an API or some other location, if you
+    # still expect to pull data from the file system then uncomment the below two lines and
+    # replace /real_data_location with the correct path
+    #volumes:
+    #  - /real_data_location:/data

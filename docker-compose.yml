@@ -1,0 +1,22 @@
+version: "3.2"
+
+services:
+  python:       
+    build: 
+      dockerfile: ./docker/Dockerfile-dev
+      context: ./
+    image: my_project_python
+    env_file:
+      - .env_dev
+
+    ports:
+      - "8888:8888"
+
+    command: 
+      jupyter lab --no-browser --ip=0.0.0.0 --allow-root --NotebookApp.token='local_dev'
+
+    volumes:
+      - ./data:/data
+      - ./code:/code
+      - ./notebooks:/notebooks
+
